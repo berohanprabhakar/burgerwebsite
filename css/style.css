@@ -1,0 +1,333 @@
+:root {
+    --burger-brown: #8B4513;
+    --cheese-yellow: #FFD700;
+    --lettuce-green: #228B22;
+    --tomato-red: #FF6347;
+    --bg-color: #fff5e6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-color);
+    font-family: 'Chewy', cursive;
+    overflow-x: hidden;
+}
+
+/* Loading Screen */
+#loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease;
+}
+
+.countdown-overlay {
+    text-align: center;
+    padding: 20px;
+}
+
+#3d-loader {
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+}
+
+/* Countdown Styles */
+.countdown {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.timer-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.timer-box span {
+    font-size: 2em;
+    display: block;
+    color: var(--tomato-red);
+}
+
+/* Main Content */
+.hidden {
+    display: none !important;
+}
+
+.revealed {
+    display: block !important;
+    animation: websiteReveal 1s ease;
+}
+
+@keyframes websiteReveal {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 4em;
+    color: var(--tomato-red);
+    text-shadow: 5px 5px var(--cheese-yellow);
+}
+
+.subtitle {
+    font-size: 1.5em;
+    color: var(--lettuce-green);
+    margin-top: 20px;
+}
+
+/* Timeline Section */
+.timeline {
+    position: relative;
+    padding: 100px 20px;
+}
+
+.timeline-path {
+    position: absolute;
+    left: 50%;
+    width: 10px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--tomato-red), var(--cheese-yellow));
+    transform: translateX(-50%);
+}
+
+.milestone {
+    position: relative;
+    width: 40%;
+    padding: 20px;
+    margin: 100px 0;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+    transform: translateX(0);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.milestone:nth-child(odd) {
+    left: 10%;
+}
+
+.milestone:nth-child(even) {
+    left: 50%;
+}
+
+/* Photo Gallery */
+.photo-gallery {
+    padding: 50px 20px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.photo-frame {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    transform: rotate(3deg);
+    transition: all 0.3s ease;
+    text-align: center; /* Ensures image stays centered */
+    max-width: 220px; /* Optional: Prevents excessive stretching */
+    margin: 0 auto;
+}
+
+.photo-frame img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 200px; /* Adjust as needed */
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px; /* Optional: adds rounded corners */
+}
+
+.photo-frame:hover {
+    transform: rotate(0deg) scale(1.1);
+    z-index: 2;
+}
+
+/* Music Player */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 5px;
+    background: #ddd;
+    margin: 10px 0;
+    border-radius: 3px;
+}
+
+
+/* Video Message Section */
+.video-message {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.video-container {
+    max-width: 800px;
+    margin: 20px auto;
+    position: relative;
+}
+
+#recordButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: var(--tomato-red);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.video-recording {
+    position: relative;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+#preview {
+    width: 100%;
+    border-radius: 15px;
+    transform: rotate(2deg);
+}
+
+#recordingStatus {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Burger Builder */
+.burger-builder {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.burger-base {
+    width: 300px;
+    height: 500px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.burger-layer {
+    position: absolute;
+    width: 100%;
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.ingredients-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.ingredient {
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ingredient:hover {
+    transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.secret-text {
+    font-size: 1.2em;
+    margin: 20px 0;
+    color: var(--burger-brown);
+}
+
+/* Fireworks Styles */
+#fireworks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+#fireworksCanvas {
+    width: 100%;
+    height: 100%;
+}
+

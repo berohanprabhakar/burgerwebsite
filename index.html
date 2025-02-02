@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Birthday Adventure for Sneh 🍔🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Bungee+Shade&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/confetti.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="countdown-overlay">
+            <h2>Counting Down to Your Special Burgerday! 🕒🍔</h2>
+            <div class="countdown">
+                <div class="timer-box"><span id="days">00</span>Days</div>
+                <div class="timer-box"><span id="hours">00</span>Hours</div>
+                <div class="timer-box"><span id="minutes">00</span>Minutes</div>
+                <div class="timer-box"><span id="seconds">00</span>Seconds</div>
+            </div>
+            <div id="3d-loader"></div>
+        </div>
+    </div>
+
+    <!-- Main Content (Hidden Initially) -->
+    <div id="mainContent" class="hidden">
+
+        <!-- Fireworks Container -->
+        <div id="fireworks" class="hidden">
+            <canvas id="fireworksCanvas"></canvas>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Happy Burgerday, BOSS (sneh(love)) ! 🍔</h1>
+            <div id="burger3d"></div>
+            <p class="subtitle">Your burger adventure begins now!</p>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="timeline">
+            <h2>Our Burger Journey 🗺️</h2>
+            <div class="timeline-path"></div>
+            
+            <!-- <div class="milestone">
+                <h3>First Bite 🥰</h3>
+                <p>Remember our first burger date? It was magical!</p>
+                <img src="assets/images/photo1.jpg" alt="First Date">
+            </div>
+            <div class="milestone">
+                <h3>Burger Hunt 🕵️‍♀️</h3>
+                <p>That time we tried 10 burger joints in one day!</p>
+                <img src="assets/images/photo2.jpg" alt="Burger Hunt">
+            </div>
+            <div class="milestone">
+                <h3>Homemade Burgers 🏡</h3>
+                <p>Our first attempt at making burgers together!</p>
+                <img src="assets/images/photo3.jpg" alt="Homemade Burgers">
+            </div> -->
+        </section>
+
+        <!-- Photo Gallery -->
+        <section class="photo-gallery">
+            <h2>Burger Memories 📸</h2>
+            <div class="photo-grid">
+                <div class="photo-frame">
+                    <img src="assets/images/photo1.jpg" alt="Memory 1">
+                </div>
+                <div class="photo-frame">
+                    <img src="assets/images/photo2.jpg" alt="Memory 2">
+                </div>
+                <div class="photo-frame">
+                    <img src="assets/images/photo3.jpg" alt="Memory 3">
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO RECORDING -->
+        <section class="video-message">
+            <h2>Special Video Message 🎥</h2>
+            <div class="video-container">
+                <video id="birthdayVideo" controls>
+                    <source src="assets/video/message.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <button id="recordButton" class="floating">🎙 Record Your Response</button>
+            </div>
+            <!-- Add to HTML -->
+            <div class="video-recording">
+            <video id="preview" class="hidden" autoplay muted></video>
+            <div id="recordingStatus" class="hidden">● Recording...</div>
+        </div>
+        </section>
+
+        <!-- Secret Message -->
+        <!-- <div id="secretMessage" class="hidden">
+            <h2>You Found the Secret Sauce! 🌟</h2>
+            <p>Here's my special message just for you...</p>
+        </div> -->
+
+        <div id="secretMessageModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Our Secret Recipe 🌟</h2>
+                <p class="secret-text"></p>
+            </div>
+        </div>
+
+        <section class="burger-builder">
+            <h2>Build Our Love Burger 🍔</h2>
+            <div class="burger-base">
+                <!-- Burger layers will be added here through JavaScript -->
+            </div>
+            <div class="ingredients-list">
+                <div class="ingredient" data-layer="bun-top">🥯 First Meeting</div>
+                <div class="ingredient" data-layer="lettuce">🥗 First Date</div>
+                <div class="ingredient" data-layer="tomato">🍅 First Kiss</div>
+                <div class="ingredient" data-layer="cheese">🧀 Our First Trip</div>
+                <div class="ingredient" data-layer="patty">🍔 Moving In Together</div>
+                <div class="ingredient" data-layer="bun-bottom">🎉 Forever Together</div>
+            </div>
+        </section>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
