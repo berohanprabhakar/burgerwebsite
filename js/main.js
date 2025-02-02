@@ -431,28 +431,35 @@ let bgMusic;
 
 // Function to play background music
 function playBackgroundMusic() {
-    if (bgMusic) {
-        bgMusic.stop(); // Stop previous music if playing
-    }
-
-    bgMusic = new Howl({
-        src: [playlist[currentIndex]],
-        autoplay: true,
-        loop: true, // No loop since we will switch songs
+    const bgMusic = new Howl({
+        src: ["assets/music/song4.mp3"],
+        autoplay: true,  // Set to true for initial playback
+        loop: true,      // Loop the music for continuous play
         volume: 0.5,
-        onend: function () {
-            // Move to the next song in the playlist
-            currentIndex = (currentIndex + 1) % playlist.length;
-            if(currentIndex == playlist.length){
-                currentIndex = 0;
-            }
-            playBackgroundMusic(); // Recursively play next song
+        onplayerror: function () {
+            bgMusic.once("unlock", function () {
+                bgMusic.play();
+            });
+        },
+        onloaderror: function () {
+            console.log("Error loading the background music.");
         }
     });
 
-    console.log(`Playing: ${playlist[currentIndex]}`);
-    return bgMusic;
+    // Handle user click to bypass autoplay restrictions
+    document.body.addEventListener("click", () => {
+        if (!bgMusic.playing()) {
+            bgMusic.play();
+        }
+    });
+
+    console.log("Background music initialized.");
+    return bgMusic;  // Return the music instance to control it later
 }
+
+// document.getElementById("playMusicBtn").addEventListener("click", () => {
+//     playBackgroundMusic();
+// });
 
 // Handle user interaction for autoplay restrictions
 document.body.addEventListener("click", () => {
