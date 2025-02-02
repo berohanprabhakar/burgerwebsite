@@ -1,5 +1,5 @@
 // Configure Birthday Date (update this to actual date)
-const BIRTHDAY_DATE = new Date("2024-02-04T00:00:00"); // Use format YYYY-MM-DD
+const BIRTHDAY_DATE = new Date("2025-02-04T00:00:00"); // Use format YYYY-MM-DD
 
 // Sound Effects
 const sounds = {
