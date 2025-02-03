@@ -3,190 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burgerday Countdown</title>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-    <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Luckiest Guy', cursive;
-            background: linear-gradient(45deg, #ff9a8b, #ff6a88, #ff99ac);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Loading Screen */
-        #loadingScreen {
-            text-align: center;
-            color: white;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .countdown-overlay h2 {
-            font-size: 2rem;
-            animation: slideDown 1.2s ease-in-out;
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .timer-box {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-        }
-
-        .timer-box:hover {
-            transform: scale(1.1);
-        }
-
-        /* Play Button */
-        #playMusicBtn {
-            background: #ff4e50;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            padding: 15px 30px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(255, 78, 80, 0.4);
-        }
-
-        #playMusicBtn:hover {
-            background: #fc913a;
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(252, 145, 58, 0.6);
-        }
-
-        /* 3D Loader */
-        #3d-loader {
-            width: 100px;
-            height: 100px;
-            margin: 30px auto;
-            background: url('https://i.imgur.com/uBXLmM8.png') center/cover no-repeat;
-            animation: pulse 1.5s infinite ease-in-out;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-    </style>
+    <title>Burger Birthday Adventure for Sneh 🍔🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Bungee+Shade&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/confetti.css">
 </head>
 <body>
-
-<div id="loadingScreen">
-    <div class="countdown-overlay">
-        <h2>Counting Down to Your Special Burgerday! 🕒🍔</h2>
-        <div class="countdown">
-            <div class="timer-box"><span id="days">00</span> Days</div>
-            <div class="timer-box"><span id="hours">00</span> Hours</div>
-            <div class="timer-box"><span id="minutes">00</span> Minutes</div>
-            <div class="timer-box"><span id="seconds">00</span> Seconds</div>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="countdown-overlay">
+            <h2>Counting Down to Your Special Burgerday! 🕒🍔</h2>
+            <div class="countdown">
+                <div class="timer-box"><span id="days">00</span>Days</div>
+                <div class="timer-box"><span id="hours">00</span>Hours</div>
+                <div class="timer-box"><span id="minutes">00</span>Minutes</div>
+                <div class="timer-box"><span id="seconds">00</span>Seconds</div>
+            </div>
+            <div id="3d-loader"></div>
         </div>
-        <div id="3d-loader"></div>
-
-        <!-- Play Music Button -->
-        <button id="playMusicBtn">🎵 Play Background Music</button>
     </div>
-</div>
 
-<script>
-    // Countdown Timer
-    function updateCountdown() {
-        const eventDate = new Date("2025-02-04T00:00:00"); // Set to Valentine's Day for now
-        const now = new Date();
-        const diff = eventDate - now;
+    <!-- Main Content (Hidden Initially) -->
+    <div id="mainContent" class="hidden">
 
-        if (diff <= 0) {
-            document.querySelector(".countdown").innerHTML = "<h2>🎉 It's Burgerday! 🎉</h2>";
-            return;
-        }
+        <!-- Fireworks Container -->
+        <div id="fireworks" class="hidden">
+            <canvas id="fireworksCanvas"></canvas>
+        </div>
 
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Happy Burgerday, My Love! 🍔💖</h1>
+                <p>Celebrating our special journey, one bite at a time.</p>
 
-        document.getElementById("days").textContent = days.toString().padStart(2, "0");
-        document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
-        document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
-        document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+            </div>
+        </section>
+        
+         <section class="timeline">
+            <h2>Our Burger Journey 🗺️🍔</h2>
+            <div class="timeline-path"></div>
+    
+            <div class="milestone" data-layer="bun-top">
+                <h3>First Bite 🥰</h3>
+                <p>Remember our first burger date? It was magical!</p>
+                <img src="assets/allimg/img23.jpg" alt="First Bite">
+            </div>
+            <div class="milestone" data-layer="lettuce">
+                <h3>Burger Hunt 🕵️‍♀️</h3>
+                <p>That time we tried 10 burger joints in one day!</p>
+                <img src="assets/allimg/img24.jpg" alt="Burger Hunt">
+            </div>
+            <div class="milestone" data-layer="tomato">
+                <h3>Homemade Burgers 🏡</h3>
+                <p>Our first attempt at making burgers together!</p>
+                <img src="assets/images/photo3.jpg" alt="Homemade Burgers">
+            </div>
+            <div class="milestone" data-layer="cheese">
+                <h3>Cheese Lovers 🧀</h3>
+                <p>That time we added the cheesiest layer to our burger!</p>
+                <img src="assets/allimg/img15.jpg" alt="Cheese Lovers">
+            </div>
+            <div class="milestone" data-layer="patty">
+                <h3>Grilling Time 🍔</h3>
+                <p>Perfecting our burger patties on the grill!</p>
+                <img src="assets/allimg/img30.jpg" alt="Grilling Time">
+            </div>
+            <div class="milestone" data-layer="bun-bottom">
+                <h3>Our Forever Together 💖</h3>
+                <p>Finishing off with the perfect burger... and the perfect relationship!</p>
+                <img src="assets/allimg/img9.jpg" alt="Forever Together">
+            </div>
+        </section>
+    
+        
+         <!-- Photo Gallery -->
+        <section class="photo-gallery">
+            <h2>Burger Memories 📸</h2>
+            <div class="photo-grid">
+                <div class="photo-frame">
+                    <img src="assets/allimg/img5.jpg" alt="Memory 1">
+                </div>
+                <div class="photo-frame">
+                    <img src="assets/images/photo2.jpg" alt="Memory 2">
+                </div>
+                <div class="photo-frame">
+                    <img src="assets/allimg/img10.jpg" alt="Memory 3">
+                </div>
 
-        setTimeout(updateCountdown, 1000);
-    }
+                <div class="photo-frame">
+                    <img src="assets/allimg/img24.jpg" alt="Memory 3">
+                </div>
 
-    updateCountdown();
+                <div class="photo-frame">
+                    <img src="assets/allimg/img22.jpg" alt="Memory 3">
+                </div>
 
-    // Background Music with Howler.js
-    let bgMusic;
-    function playBackgroundMusic() {
-        if (!bgMusic) {
-            bgMusic = new Howl({
-                src: ["assets/music/song4.mp3"],
-                autoplay: true,
-                loop: true,
-                volume: 0.5,
-                onplayerror: function () {
-                    bgMusic.once("unlock", function () {
-                        bgMusic.play();
-                    });
-                }
-            });
-        } else if (!bgMusic.playing()) {
-            bgMusic.play();
-        }
-    }
+                <div class="photo-frame">
+                    <img src="assets/allimg/img9.jpg" alt="Memory 3">
+                </div>
 
-    // Button Click Event
-    document.getElementById("playMusicBtn").addEventListener("click", () => {
-        playBackgroundMusic();
-    });
-</script>
+                <div class="photo-frame">
+                    <img src="assets/allimg/img6.jpg" alt="Memory 3">
+                </div>
 
-<!-- Howler.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+                <div class="photo-frame">
+                    <img src="assets/allimg/img3.jpg" alt="Memory 3">
+                </div>
+                <div class="photo-frame">
+                    <img src="assets/allimg/img15.jpg" alt="Memory 3">
+                </div>
+                <div class="photo-frame">
+                    <img src="assets/allimg/img12.jpg" alt="Memory 3">
+                </div>
+                
+            </div>
+        </section>
 
+
+        <section class="letter-section">
+            <div class="letter-container">
+                <div class="letter-header">
+                    <h2>My Dearest Heart,</h2>
+                </div>
+                <div class="letter-body">
+                    <p>
+                        We love. We fight. We break. But in the end, we always find our way back to each other. That’s what makes us special—our bond, our friendship, our endless gossips, and the way we understand each other even in silence.
+                    </p>
+                    <p>
+                        I know I haven't been the best boyfriend at times. I get caught up in my work, I struggle to be as romantic as you deserve, and I don’t always give you the time you need. But despite all of that, one thing remains constant—I love you. With everything I have, with everything I am.
+                    </p>
+                    <p>
+                        You support me when I feel lost, you care for me in ways I never even ask for, and you feed me (sometimes even force me to eat, because you know I forget). And that means the world to me. I may not always say it, but I see everything you do for me, and I cherish you more than words can ever express.
+                    </p>
+                    <p>
+                        No matter how tough things get, I promise you that I will always be here. Because at the end of the day, it’s you who makes my life beautiful. It’s you who brings warmth to my coldest days. And it’s you who I want to love, again and again, in this life and beyond.
+                    </p>
+                </div>                
+                <div class="letter-footer">
+                    <p>Yours Eternally,</p>
+                    <p><strong>Rohan</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <div class="photo-bar">
+            <div class="photo-scroll" id="photoScrollContainer">
+                <!-- Images will be dynamically inserted here -->
+            </div>
+        </div>
+        
+
+
+        <!-- <section class="burger-builder">
+            <h2>Build Our Love Burger 🍔</h2>
+            <div class="burger-base">
+                <-- Burger layers will be added here through JavaScript -->
+            <!-- </div>
+            <div class="ingredients-list">
+                <div class="ingredient" data-layer="bun-top">🥯 First Meeting</div>
+                <div class="ingredient" data-layer="lettuce">🥗 First Date</div>
+                <div class="ingredient" data-layer="tomato">🍅 First Kiss</div>
+                <div class="ingredient" data-layer="cheese">🧀 Our First Trip</div>
+                <div class="ingredient" data-layer="patty">🍔 Moving In Together</div>
+                <div class="ingredient" data-layer="bun-bottom">🎉 Forever Together</div>
+            </div>
+        </section> -->
+        
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

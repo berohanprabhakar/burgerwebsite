@@ -81,14 +81,38 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
+
 /* Hero Section */
 .hero {
+    position: relative;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background-image: url("../assets/images/photo2.jpg");  /* Your girlfriend's image */
+    background-size: cover;
+    background-position: center;
+    z-index: -1;  /* Make sure the background is behind the content */
+}
+
+/* Overlay to make text visible */
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);  /* Semi-transparent dark overlay */
+    z-index: 0;  /* Ensure the overlay is behind the content */
+}
+
+/* Centering the text content */
+.hero-content {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
     text-align: center;
+    z-index: 1;  /* Ensure the content is above the overlay */
 }
 
 .hero h1 {
@@ -97,16 +121,34 @@ body {
     text-shadow: 5px 5px var(--cheese-yellow);
 }
 
-.subtitle {
-    font-size: 1.5em;
-    color: var(--lettuce-green);
-    margin-top: 20px;
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
 }
+
+.hero button {
+    background-color: #ff5722;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.hero button:hover {
+    background-color: #ff7043;
+}
+
 
 /* Timeline Section */
 .timeline {
     position: relative;
     padding: 100px 20px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 }
 
 .timeline-path {
@@ -114,7 +156,7 @@ body {
     left: 50%;
     width: 10px;
     height: 100%;
-    background: linear-gradient(to bottom, var(--tomato-red), var(--cheese-yellow));
+    background: linear-gradient(to bottom, #ff5722, #ffeb3b); /* Tomato Red to Cheese Yellow */
     transform: translateX(-50%);
 }
 
@@ -126,17 +168,62 @@ body {
     background: white;
     border-radius: 20px;
     box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
-    transform: translateX(0);
     opacity: 0;
+    transform: translateX(100px);
     transition: all 1s ease;
 }
 
+.milestone img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Animations & Transitions */
 .milestone:nth-child(odd) {
     left: 10%;
 }
 
 .milestone:nth-child(even) {
     left: 50%;
+}
+
+/* Unique burger layers */
+.milestone[data-layer="bun-top"] {
+    background-color: #FF5722; /* Burger bun color */
+    color: white;
+}
+
+.milestone[data-layer="lettuce"] {
+    background-color: #8BC34A; /* Lettuce Green */
+    color: white;
+}
+
+.milestone[data-layer="tomato"] {
+    background-color: #FF7043; /* Tomato Red */
+    color: white;
+}
+
+.milestone[data-layer="cheese"] {
+    background-color: #FFEB3B; /* Cheese Yellow */
+    color: black;
+}
+
+.milestone[data-layer="patty"] {
+    background-color: #795548; /* Patty Brown */
+    color: white;
+}
+
+.milestone[data-layer="bun-bottom"] {
+    background-color: #FF5722; /* Burger Bun Bottom */
+    color: white;
+}
+
+/* When the milestone is visible in the viewport */
+.milestone.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* Photo Gallery */
@@ -246,7 +333,7 @@ body {
     display: none;
 }
 
-/* Burger Builder */
+
 .burger-builder {
     padding: 50px 20px;
     text-align: center;
@@ -287,7 +374,7 @@ body {
 }
 
 /* Modal Styles */
-.modal {
+ .modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -307,7 +394,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+}  
 
 .secret-text {
     font-size: 1.2em;
@@ -331,3 +418,229 @@ body {
     height: 100%;
 }
 
+.love-button {
+    background: #ff6b6b;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    display: block;
+    margin: 20px auto;
+}
+
+.love-button:hover {
+    transform: scale(1.1);
+    background: #ff5252;
+}
+
+.love-modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255,107,107,0.3);
+}
+
+.love-modal input {
+    padding: 10px;
+    margin: 15px 0;
+    border: 2px solid #ff6b6b;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.love-modal button {
+    background: #ff6b6b;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+
+/* Bouncy Button Animation */
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+button:hover {
+    animation: bounce 0.5s ease-in-out;
+}
+
+
+/*  */
+
+.photo-bar {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Set the height of the photo bar */
+    overflow: hidden;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Optional: gradient background */
+    padding: 20px 10px;
+}
+
+/* Photo scrolling effect */
+.photo-scroll {
+    display: flex;
+    animation: scroll 60s linear infinite; /* Adjust scroll speed */
+    width: max-content; /* Ensures continuous scrolling */
+}
+
+/* Styling for each photo frame */
+.photo-frame {
+    flex: 0 0 auto; /* Prevent flex from shrinking */
+    margin-right: 20px; /* Space between images */
+    padding: 5px;
+}
+
+/* Image styling */
+.photo-frame img {
+    width: 300px; /* Set image width */
+    height: 300px; /* Fixed height for larger images */
+    object-fit: cover; /* Ensures images don't get stretched */
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for photo frame */
+.photo-frame:hover {
+    transform: rotate(0deg) scale(1.1);
+    z-index: 2;
+}
+
+/* Hover effect for the image */
+.photo-frame:hover img {
+    transform: scale(1.1);
+}
+
+/* Scroll animation for the photo bar */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Move half the container width */
+    }
+}
+
+/* Fade-in animation for photo frame */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Styling for the entire letter section */
+.letter-section {
+    background: linear-gradient(135deg, #fae3d9, #f1d8e8); /* Soft pastel gradient */
+    padding: 60px 20px;
+    text-align: center;
+    font-family: 'Times New Roman', serif; /* Classic font for elegance */
+}
+
+/* Styling for the letter container */
+.letter-container {
+    background: url('../assets/images/vitageletter.jpg') repeat, #f3e9d2; /* Add vintage paper texture */
+    background-size: cover; /* Ensures the texture covers the entire container */
+    background-position: center;
+    border-radius: 15px;
+    padding: 50px;
+    width: 80%;
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    font-family: 'Dancing Script', cursive; /* Elegant cursive font */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Styling for the letter header */
+.letter-header h2 {
+    font-size: 36px;
+    color: #9a4e97; /* Romantic purple color */
+    margin-bottom: 30px;
+    font-style: italic;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+}
+
+/* Styling for the letter body */
+.letter-body p {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #4a2f3a;
+    margin-bottom: 30px;
+    text-align: left;
+    animation: typing 10s steps(120) 1s normal both; /* Slow typewriter effect */
+}
+
+/* Letter footer */
+.letter-footer p {
+    font-size: 24px;
+    color: #9a4e97;
+    font-weight: bold;
+    margin-top: 30px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Candle flicker effect */
+.letter-container::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: 30px;
+    height: 40px;
+    background: url('../assets/images/candle.jpeg') no-repeat center center;
+    background-size: contain;
+    animation: flicker 0.5s infinite alternate;
+    z-index: 1;
+}
+
+/* Typewriter effect for the letter */
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Candle flicker animation */
+@keyframes flicker {
+    0% {
+        opacity: 0.7;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
+}
